@@ -47,7 +47,7 @@ type Config struct {
 	// Pool 通用对象池
 	Pool *pool.Pool `json:"pool,omitempty"`
 
-	ExtensionRaw map[string]json.RawMessage `json:"extension,omitempty"`
+	ExtensionRaw map[string]json.RawMessage `json:"ext,omitempty"`
 
 	readyMods map[string]Ready
 	ctx       caddy.Context

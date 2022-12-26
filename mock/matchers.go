@@ -78,7 +78,7 @@ func (c Matchers) Validate() error {
 	for _, matcherConf := range c.Matchers {
 		v, err := typemap.Get[mock.Matcher](context.Background(), matcherConf.Name)
 		if err != nil {
-			return errors.WithMessagef(err, "get resource %s instance %s failed", resourceName, matcherConf.Name)
+			return errors.WithMessagef(err, "get resource %s instance %s failed", typemap.GetTypeIdString[mock.Matcher](), matcherConf.Name)
 		}
 		if v == nil {
 			return errors.Errorf("config.mock.matchers %s is nil pointer", matcherConf.Name)
@@ -90,7 +90,7 @@ func (c Matchers) Validate() error {
 // Produces 记录资源和模块生产关系
 func (c Matchers) Produces() []string {
 	return []string{
-		mock.MetaOfMatcher.Name(),
+		typemap.GetTypeIdString[mock.Matcher](),
 	}
 }
 
