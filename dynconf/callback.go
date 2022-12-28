@@ -54,27 +54,27 @@ func init() {
 // 3. reference callbacks(e.g. nacos)
 //
 // {
-// 	   "config": {
-// 	   	   "ext": {
-// 	   	   	   "dynconf": {
-// 	   	   	   	   "listeners": [
-//	                   {
-//	                       "listener": "nacos",
+//     "config": {
+//         "ext": {
+//             "dynconf": {
+//                 "listeners": [
+//                     {
+//                         "listener": "nacos",
 //                         "server_config": "",
 //                         "client_config": "",
 //                         "datas": [
 //                             "group": "group"
-//	                           "data_id": "data_id",
+//                             "data_id": "data_id",
 //                             "callbacks": [
-//                                 	"group:data_id",
-//                                  "group:data_id:log"
+//                                 "group:data_id",
+//                                 "group:data_id:log"
 //                             ]
 //                         ]
 //                     }
 //                 ]
-// 	   	   	   }
-// 	   	   }
-// 	   }
+//             }
+//         }
+//     }
 // }
 type Callbacks struct {
 	Defaults []CallbackDefault `json:"defaults,omitempty"`
