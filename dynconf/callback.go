@@ -54,16 +54,27 @@ func init() {
 // 3. reference callbacks(e.g. nacos)
 //
 // {
-// 	   "group": "xxx",
-// 	   "datas": [
-// 	   	   {
-// 	   	   	   "data_id": "1",
-// 	   	   	   "callbacks": [
-// 	   	   	   	   "group:data_id",
-//                 "group:data_id:log"
-// 	   	   	   ]
+// 	   "config": {
+// 	   	   "ext": {
+// 	   	   	   "dynconf": {
+// 	   	   	   	   "listeners": [
+//	                   {
+//	                       "listener": "nacos",
+//                         "server_config": "",
+//                         "client_config": "",
+//                         "datas": [
+//                             "group": "group"
+//	                           "data_id": "data_id",
+//                             "callbacks": [
+//                                 	"group:data_id",
+//                                  "group:data_id:log"
+//                             ]
+//                         ]
+//                     }
+//                 ]
+// 	   	   	   }
 // 	   	   }
-// 	   ]
+// 	   }
 // }
 type Callbacks struct {
 	Defaults []CallbackDefault `json:"defaults,omitempty"`
@@ -167,3 +178,8 @@ func (r RegCallback[T]) Callback(sourceKey, data string) error {
 	}
 	return nil
 }
+
+// Interface guard
+var (
+	_ caddy.Provisioner = (*Callbacks)(nil)
+)
