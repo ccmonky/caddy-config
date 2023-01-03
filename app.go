@@ -13,6 +13,7 @@ import (
 	"github.com/ccmonky/caddy-config/mock"
 	"github.com/ccmonky/caddy-config/pool"
 	"github.com/ccmonky/caddy-config/trace"
+	"github.com/ccmonky/pkg/inithook"
 )
 
 func init() {
@@ -23,6 +24,9 @@ func init() {
 type Config struct {
 	// PreApps 设定前置Apps
 	PreApps []string `json:"pre_apps"`
+
+	// InitHook used to config init attrs, e.g. `app_name`
+	*InitHook `json:"init_hook"`
 
 	// Registries 资源注册表?
 	//Registries *registry.Registries
@@ -54,15 +58,26 @@ type Config struct {
 	logger    *zap.Logger
 }
 
+type InitHook struct {
+	AppName string                     `json:"app_name"`
+	Version string                     `json:"version"`
+	Attrs   map[string]json.RawMessage `json:"attrs,omitempty"`
+}
+
 // Ready 用于执行就绪检查，有些tproxy插件在Provision和Validate阶段无法做引用资源有效性检查
 type Ready interface {
 	Ready() error
 }
 
+// ID module id string representation
+func (Config) ID() string {
+	return "config"
+}
+
 // CaddyModule returns the Caddy module information.
-func (Config) CaddyModule() caddy.ModuleInfo {
+func (c Config) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
-		ID:  "config",
+		ID:  c.ID(),
 		New: func() caddy.Module { return new(Config) },
 	}
 }
@@ -71,23 +86,26 @@ func (Config) CaddyModule() caddy.ModuleInfo {
 func (c *Config) Provision(ctx caddy.Context) error {
 	c.ctx = ctx
 	c.logger = ctx.Logger(c)
-	for _, appName := range c.PreApps {
-		if appName == "config" {
-			continue
-		}
-		_, err := ctx.App(appName) // NOTE: ensure `appName` App already provisioned
-		if err != nil {
-			return errors.Wrapf(err, "config rely on %s App failed", appName)
-		}
+	err := ProvisionPreApps(ctx, c.ID(), c.PreApps)
+	if err != nil {
+		return err
 	}
 
-	// NOTE: 由于CodecCacher需要设定newInstanceFunc和loadInstanceFunc，因此放入具体模块初始化阶段定义Meta和Cacher！
-	// if c.Registries != nil {
-	// 	err := c.Registries.Provision(ctx)
-	// 	if err != nil {
-	// 		return err
-	// 	}
-	// }
+	if c.InitHook != nil {
+		if c.Attrs == nil {
+			c.Attrs = make(map[string]json.RawMessage)
+		}
+		if c.AppName != "" {
+			c.Attrs["app_name"] = json.RawMessage(fmt.Sprintf(`"%s"`, c.AppName))
+		}
+		if c.Version != "" {
+			c.Attrs["version"] = json.RawMessage(fmt.Sprintf(`"%s"`, c.Version))
+		}
+		err := inithook.ExecuteMapAttrSetters(ctx, c.Attrs)
+		if err != nil {
+			return fmt.Errorf("caddy-config: inithook execute failed: %v", err)
+		}
+	}
 
 	if c.Logging != nil {
 		err := c.Logging.Provision(ctx)
@@ -219,7 +237,8 @@ func (c *Config) Start() error {
 	}
 	// 1. 注册BuiltinAPIRouter
 	// NOTE: 为什么放这里？因此有些如sso、errorspace可能是在provision里才注册BuiltinAPIRouter，此处Provision已经全部执行完毕！
-	return registerBuiltinAPIRouters()
+	//return registerBuiltinAPIRouters()
+	return nil
 }
 
 // Stop gracefully shuts down the HTTP server.

@@ -160,7 +160,7 @@ func (r RegCallback[T]) Callback(sourceKey, data string) error {
 	}
 	// 2. validate
 	tmp := make(map[string]any)
-	err = json.Unmarshal([]byte(data), &tmp)
+	err = json.Unmarshal([]byte(data), &tmp) // FIXME: strict mode?
 	if err != nil {
 		return err
 	}

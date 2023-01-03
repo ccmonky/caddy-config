@@ -50,6 +50,8 @@ github.com/caddyserver/certmagic v0.17.2 h1:o30seC1T/dBqBCNNGNHWwj2i5/I/FMjBbTAh
 github.com/caddyserver/certmagic v0.17.2/go.mod h1:ouWUuC490GOLJzkyN35eXfV8bSbwMwSf4bdhkIxtdQE=
 github.com/ccmonky/pkg v0.0.0-20221210090630-108d130d8d29 h1:yZ0dzNklfCTq0j0O84Qw4aDFXVgBx/ERaiMBPDCI7S4=
 github.com/ccmonky/pkg v0.0.0-20221210090630-108d130d8d29/go.mod h1:NDJdebRRialChE6/j+KuMLy94Kfdiu5Qd0cgjJAF6+U=
+github.com/ccmonky/pkg v0.0.0-20230103023739-b9f5c9c34763 h1:tq5SkbeiA3oXC+zPJ29sRq3tH5F/GoHNiYAH7JD/mFo=
+github.com/ccmonky/pkg v0.0.0-20230103023739-b9f5c9c34763/go.mod h1:NDJdebRRialChE6/j+KuMLy94Kfdiu5Qd0cgjJAF6+U=
 github.com/ccmonky/typemap v0.4.3 h1:oi6qntbBHEFQHvyXX1ijf+HrDondgzXTB8EkugNuiH8=
 github.com/ccmonky/typemap v0.4.3/go.mod h1:YJolQtmAQmqhuLAHnYtqfgt8QPd/zzsk65vOc0F2kzI=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=

@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/caddyserver/caddy/v2 v2.6.2
-	github.com/ccmonky/pkg v0.0.0-20221210090630-108d130d8d29
+	github.com/ccmonky/pkg v0.0.0-20230103023739-b9f5c9c34763
 	github.com/ccmonky/typemap v0.4.3
 	github.com/pkg/errors v0.9.1
 	go.uber.org/zap v1.24.0
