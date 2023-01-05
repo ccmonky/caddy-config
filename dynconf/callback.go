@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/caddyserver/caddy/v2"
@@ -172,7 +173,10 @@ func (r RegCallback[T]) Callback(sourceKey, data string) error {
 	if typeNotFound {
 		reg.Action = typemap.RegisterAction
 	}
-	err = json.Unmarshal([]byte(data), reg)
+	decoder := json.NewDecoder(strings.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(reg)
+	//err = json.Unmarshal([]byte(data), reg)
 	if err != nil {
 		return err
 	}

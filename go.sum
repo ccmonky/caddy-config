@@ -48,12 +48,10 @@ github.com/caddyserver/caddy/v2 v2.6.2 h1:wKoFIxpmOJLGl3QXoo6PNbYvGW4xLEgo32GPBE
 github.com/caddyserver/caddy/v2 v2.6.2/go.mod h1:ICM4D+OiSexKF077f92MzFRlbkmX4tu4TB8DJAG/lUk=
 github.com/caddyserver/certmagic v0.17.2 h1:o30seC1T/dBqBCNNGNHWwj2i5/I/FMjBbTAhjADP3nE=
 github.com/caddyserver/certmagic v0.17.2/go.mod h1:ouWUuC490GOLJzkyN35eXfV8bSbwMwSf4bdhkIxtdQE=
-github.com/ccmonky/pkg v0.0.0-20221210090630-108d130d8d29 h1:yZ0dzNklfCTq0j0O84Qw4aDFXVgBx/ERaiMBPDCI7S4=
-github.com/ccmonky/pkg v0.0.0-20221210090630-108d130d8d29/go.mod h1:NDJdebRRialChE6/j+KuMLy94Kfdiu5Qd0cgjJAF6+U=
-github.com/ccmonky/pkg v0.0.0-20230103023739-b9f5c9c34763 h1:tq5SkbeiA3oXC+zPJ29sRq3tH5F/GoHNiYAH7JD/mFo=
-github.com/ccmonky/pkg v0.0.0-20230103023739-b9f5c9c34763/go.mod h1:NDJdebRRialChE6/j+KuMLy94Kfdiu5Qd0cgjJAF6+U=
-github.com/ccmonky/typemap v0.4.3 h1:oi6qntbBHEFQHvyXX1ijf+HrDondgzXTB8EkugNuiH8=
-github.com/ccmonky/typemap v0.4.3/go.mod h1:YJolQtmAQmqhuLAHnYtqfgt8QPd/zzsk65vOc0F2kzI=
+github.com/ccmonky/pkg v0.0.0-20230105084746-332bc70c0b12 h1:rTG8N071YhuVZ0uJilt8gyfIRhEWRaszOmGNXWr6ULA=
+github.com/ccmonky/pkg v0.0.0-20230105084746-332bc70c0b12/go.mod h1:cXcqEAdAuCWN2dm4DiOnWDIiPMuZ0cZrsL2COda5M/8=
+github.com/ccmonky/typemap v0.5.0 h1:8DtiI/Fyc5Y4Ceqy0j85IUHDvYm/1q1sv/m9w7DxBr4=
+github.com/ccmonky/typemap v0.5.0/go.mod h1:YJolQtmAQmqhuLAHnYtqfgt8QPd/zzsk65vOc0F2kzI=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash/v2 v2.1.1/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/cespare/xxhash/v2 v2.1.2 h1:YRXhKfTDauu4ajMg1TPgFO5jnlC2HCbmLXMcTG5cbYE=

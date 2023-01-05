@@ -28,9 +28,6 @@ type Config struct {
 	// InitHook used to config init attrs, e.g. `app_name`
 	*InitHook `json:"init_hook"`
 
-	// Registries 资源注册表?
-	//Registries *registry.Registries
-
 	// Logging 定义应用依赖的三方库使用的logger资源
 	Logging *logging.Logging `json:"logging,omitempty"`
 
