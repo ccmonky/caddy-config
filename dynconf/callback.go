@@ -160,6 +160,7 @@ func (r RegCallback[T]) Callback(sourceKey, data string) error {
 		log.Printf("change data %s from %s to %s\n", sourceKey, string(oldData), data) // TODO: inject logger
 	}
 	// 2. validate
+	// 2.1 validate typemap instance key
 	tmp := make(map[string]any)
 	err = json.Unmarshal([]byte(data), &tmp) // FIXME: strict mode?
 	if err != nil {
@@ -167,6 +168,11 @@ func (r RegCallback[T]) Callback(sourceKey, data string) error {
 	}
 	if tmp["name"] != r.Name {
 		return fmt.Errorf("name %s not equals to default name %s", tmp["name"], r.Name)
+	}
+	// 2.2 validate with schema(all fields should be present)
+	err = validator.Validate(&r, []byte(data))
+	if err != nil {
+		return err
 	}
 	// 3. parse data and inject into typemap
 	reg := new(typemap.Reg[T])
@@ -176,7 +182,6 @@ func (r RegCallback[T]) Callback(sourceKey, data string) error {
 	decoder := json.NewDecoder(strings.NewReader(data))
 	decoder.DisallowUnknownFields()
 	err = decoder.Decode(reg)
-	//err = json.Unmarshal([]byte(data), reg)
 	if err != nil {
 		return err
 	}
