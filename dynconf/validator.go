@@ -50,21 +50,11 @@ func (m deleteJsonOmitemptyMarker) MakeTag(t reflect.Type, fieldIndex int) refle
 type DefaultGenerator struct{}
 
 func (g DefaultGenerator) Reflect(v interface{}) ([]byte, error) {
-	schema := jsgen.Reflect(v)
-	data, err := json.Marshal(schema)
-	if err != nil {
-		return nil, err
-	}
-	return data, nil
+	return json.Marshal(jsgen.Reflect(v))
 }
 
 func (g DefaultGenerator) ReflectFromType(t reflect.Type) ([]byte, error) {
-	schema := jsgen.ReflectFromType(t)
-	data, err := json.Marshal(schema)
-	if err != nil {
-		return nil, err
-	}
-	return data, nil
+	return json.Marshal(jsgen.ReflectFromType(t))
 }
 
 func DefaultValidate(schema, data []byte) error {
